@@ -24,24 +24,24 @@ If it starts with: `+44, 44, 0` it has to be followed by `7` and `9 digits`. If 
 
 ```ruby
 module  Formatter
-	module  PhoneNumber
-		module  UK
+  module  PhoneNumber
+    module  UK
       VALID_PREFIX  =  /^(0|\+?44)(?:\s?|\s+)(?:7)(?:\s?|\s+)(?:\d\s?|\d\s+){9}$/.freeze
       VALID_CODE_PREFIX  =  /^(0|\+?44)/.freeze
       VALID_LEAD  =  /^(7)(?:\s?|\s+)(?:\d\s?|\d\s+){9}$/.freeze
       TWILIO_PREFIX  =  '+44'
 
       def  self.format(number)
-          if number.match(VALID_PREFIX)
-              number.gsub(VALID_CODE_PREFIX,  TWILIO_PREFIX).delete('  ')
-          elsif number.match(VALID_LEAD)
-              (TWILIO_PREFIX  + number).delete('  ')
-          else
-              raise  'Number Not Valid'
-          end
+        if number.match(VALID_PREFIX)
+          number.gsub(VALID_CODE_PREFIX,  TWILIO_PREFIX).delete('  ')
+        elsif number.match(VALID_LEAD)
+          (TWILIO_PREFIX  + number).delete('  ')
+        else
+          raise  'Number Not Valid'
+        end
       end
-		end
-	end
+    end
+  end
 end
 ```
 
@@ -66,13 +66,13 @@ VALID_LEAD  =  /^(7)(?:\s?|\s+)(?:\d\s?|\d\s+){9}$/.freeze
 
 ```ruby
 def  self.format(number)
-	if number.match(VALID_PREFIX)
-		number.gsub(VALID_CODE_PREFIX,  TWILIO_PREFIX).delete('  ')
-	elsif number.match(VALID_LEAD)
-		(TWILIO_PREFIX  + number).delete('  ')
-	else
-		raise  'Number Not Valid'
-	end
+  if number.match(VALID_PREFIX)
+    number.gsub(VALID_CODE_PREFIX,  TWILIO_PREFIX).delete('  ')
+  elsif number.match(VALID_LEAD)
+    (TWILIO_PREFIX  + number).delete('  ')
+  else
+    raise  'Number Not Valid'
+  end
 end
 ```
 `self.format(number)` is a method that will run the regex checkers and format accordingly to the returning matcher. Whether it's a `VALID_PREFIX`, `VALID_LEAD` or not a match at all which will raise an error Instead.
